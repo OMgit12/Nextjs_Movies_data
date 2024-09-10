@@ -1,12 +1,14 @@
 import styles from "./page.module.css";
 import MovieCard from "./components/MovieCard";
+import MovieDetails from "./components/MovieDetails";
+import type { Metadata } from "next";
 
 const api_key = process.env.API_KEY;
 
 interface MovieDetails {
   title: string;
   poster_path: string;
-  discription: string;
+  description: string;
   id: number;
   overview: string;
   original_title: string;
@@ -14,6 +16,11 @@ interface MovieDetails {
   popularity: number;
   release_date: string;
 }
+
+export const metadata: Metadata = {
+  title: "Popular Movies",
+  description: "Get all popular movies here",
+};
 
 const getMovies = async () => {
   const MoviesList = await fetch(
@@ -34,8 +41,8 @@ export default async function Home() {
           <MovieCard
             key={movie.id}
             title={movie.title}
-            poster_path={movie.poster_path}
-            discription={movie.overview}
+            posterPath={movie.poster_path}
+            description={movie.overview}
             id={movie.id}
           />
         ))}
